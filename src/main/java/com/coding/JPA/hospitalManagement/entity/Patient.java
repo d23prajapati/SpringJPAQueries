@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @ToString
@@ -28,12 +29,13 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 40)
     private String name;
 
 //    @ToString.Exclude
     private LocalDate birthDate;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     private String gender;
@@ -44,4 +46,11 @@ public class Patient {
 
     @Enumerated(EnumType.STRING)
     private BloodGroup bloodGroup;
+
+    @OneToOne
+    @JoinColumn(name = "patient_insurance_id")
+    private Insurance insurance; // owning side
+
+    @OneToMany(mappedBy = "patient")
+    private List<Appointment> appointments; // inverse side
 }
