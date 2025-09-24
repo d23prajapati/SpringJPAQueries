@@ -1,10 +1,7 @@
 package com.coding.JPA.hospitalManagement.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Insurance {
 
     @Id
@@ -34,5 +32,6 @@ public class Insurance {
     private LocalDate createdAt;
 
     @OneToOne(mappedBy = "insurance") // inverse side
+    @ToString.Exclude
     private Patient patient;
 }

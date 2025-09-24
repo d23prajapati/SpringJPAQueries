@@ -1,10 +1,13 @@
 package com.coding.JPA.hospitalManagement.services;
 
+import com.coding.JPA.hospitalManagement.entity.Appointment;
 import com.coding.JPA.hospitalManagement.entity.Patient;
 import com.coding.JPA.hospitalManagement.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +24,12 @@ public class PatientService {
         p1.setName("yoyo");
 
         return p1;
+    }
+
+    @Transactional
+    public void removePatient(Long patientId) {
+        Patient patient = patientRepository.findById(patientId).orElseThrow();
+
+        patientRepository.delete(patient);
     }
 }

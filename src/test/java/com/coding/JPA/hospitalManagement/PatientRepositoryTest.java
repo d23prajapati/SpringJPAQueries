@@ -25,11 +25,12 @@ public class PatientRepositoryTest {
     @Autowired
     private PatientService patientService;
 
-//    @Test
-//    public void testPatientRepository(){
+    @Test
+    public void testPatientRepository(){
 //        List<Patient> patients = patientRepository.findAll();
-//        System.out.println(patients);
-//    }
+        List<Patient> patients = patientRepository.findAllPatientsWithAppointment();
+        System.out.println(patients);
+    }
 //
 //    @Test
 //    public void testPatientService(){
