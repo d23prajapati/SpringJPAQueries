@@ -1,29 +1,38 @@
 package com.coding.JPA.hospitalManagement.services;
 
+import com.coding.JPA.hospitalManagement.dto.PatientResponseDto;
 import com.coding.JPA.hospitalManagement.entity.Appointment;
 import com.coding.JPA.hospitalManagement.entity.Patient;
 import com.coding.JPA.hospitalManagement.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PatientService {
     private final PatientRepository patientRepository;
+    private final ModelMapper modelMapper;
 
-    @Transactional
-    public Patient getPatientById(Long id) {
-        Patient p1 = patientRepository.findById(id).orElseThrow();
-        Patient p2 = patientRepository.findById(id).orElseThrow();
+    public PatientResponseDto getPatientById(Long id) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Patient not found with id " + id));
 
-        System.out.println(p1 == p2);
+        return modelMapper.map(patient, PatientResponseDto.class);
+    }
 
-        p1.setName("yoyo");
+    public List<PatientResponseDto> getAllPatients(Integer pageNumber, Integer pageSize) {
+        Page<Patient> patients = patientRepository.findAll(PageRequest.of(pageNumber, pageSize));
 
-        return p1;
+        return patients.stream()
+                .map(patient -> modelMapper.map(patient, PatientResponseDto.class))
+                .collect(Collectors.toList());
     }
 
     @Transactional

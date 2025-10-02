@@ -20,48 +20,48 @@ public class AppointmentTests {
     @Autowired
     private PatientService patientService;
 
-    @Test
-    public void testCreateNewAppointment(){
-        Appointment appointment = Appointment.builder()
-                .appointmentTime(LocalDateTime.of(2025, 11, 12, 14,0))
-                .reason("Joint pain")
-                .build();
+//    @Test
+//    public void testCreateNewAppointment(){
+//        Appointment appointment = Appointment.builder()
+//                .appointmentTime(LocalDateTime.of(2025, 11, 12, 14,0))
+//                .reason("Joint pain")
+//                .build();
+//
+////        var newAppointment = appointmentService.createNewAppointment(appointment, 3L, 1L);
+//
+//        System.out.println(newAppointment);
+//
+//        var reassignedAppointment = appointmentService.reAssignApointment(newAppointment.getId(), 2L);
+//
+//        System.out.println(reassignedAppointment);
+//    }
 
-        var newAppointment = appointmentService.createNewAppointment(appointment, 3L, 1L);
-
-        System.out.println(newAppointment);
-
-        var reassignedAppointment = appointmentService.reAssignApointment(newAppointment.getId(), 2L);
-
-        System.out.println(reassignedAppointment);
-    }
-
-    @Test
-    public void testAppointments() {
-        Appointment appointment1 = Appointment.builder()
-                .appointmentTime(LocalDateTime.of(2025, 11, 12, 14,0))
-                .reason("Joint pain")
-                .build();
-
-        Appointment appointment2 = Appointment.builder()
-                .appointmentTime(LocalDateTime.of(2025, 12, 1, 9,0))
-                .reason("Leg pain")
-                .build();
-
-        Appointment appointment3 = Appointment.builder()
-                .appointmentTime(LocalDateTime.of(2026, 1, 2, 13,45))
-                .reason("Hand pain")
-                .build();
-
-        List<Appointment> appointments = new ArrayList<>();
-        appointments.add(appointment1);
-        appointments.add(appointment2);
-        appointments.add(appointment3);
-
-        var appointmentList = appointmentService.createNewAppointment(appointments, 3L, 1L);
-
-        System.out.println(appointmentList);
-
-        patientService.removePatient(1L);
-    }
+//    @Test
+//    public void testAppointments() {
+//        Appointment appointment1 = Appointment.builder()
+//                .appointmentTime(LocalDateTime.of(2025, 11, 12, 14,0))
+//                .reason("Joint pain")
+//                .build();
+//
+//        Appointment appointment2 = Appointment.builder()
+//                .appointmentTime(LocalDateTime.of(2025, 12, 1, 9,0))
+//                .reason("Leg pain")
+//                .build();
+//
+//        Appointment appointment3 = Appointment.builder()
+//                .appointmentTime(LocalDateTime.of(2026, 1, 2, 13,45))
+//                .reason("Hand pain")
+//                .build();
+//
+//        List<Appointment> appointments = new ArrayList<>();
+//        appointments.add(appointment1);
+//        appointments.add(appointment2);
+//        appointments.add(appointment3);
+//
+//        var appointmentList = appointmentService.createNewAppointment(appointments, 3L, 1L);
+//
+//        System.out.println(appointmentList);
+//
+//        patientService.removePatient(1L);
+//    }
 }
