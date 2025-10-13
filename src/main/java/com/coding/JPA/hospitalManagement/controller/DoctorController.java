@@ -1,9 +1,11 @@
 package com.coding.JPA.hospitalManagement.controller;
 
 import com.coding.JPA.hospitalManagement.dto.AppointmentResponseDto;
+import com.coding.JPA.hospitalManagement.entity.User;
 import com.coding.JPA.hospitalManagement.services.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,8 @@ public class DoctorController {
 
     @GetMapping("/appointments")
     public ResponseEntity<List<AppointmentResponseDto>> getAllAppointments() {
-        return ResponseEntity.ok(appointmentService.getAllAppointments());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return ResponseEntity.ok(appointmentService.getAllAppointmentsOfDoctor(user.getId()));
     }
 }

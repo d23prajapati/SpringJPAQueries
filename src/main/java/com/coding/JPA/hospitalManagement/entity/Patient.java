@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(
         uniqueConstraints = {
                 @UniqueConstraint(name = "unique_patient_email_name", columnNames = {"email","name"})
@@ -53,4 +54,8 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Appointment> appointments; // inverse side
+
+    @OneToOne
+    @MapsId
+    private User user;
 }

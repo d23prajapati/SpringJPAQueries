@@ -14,6 +14,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +36,8 @@ public class Doctor {
     @ManyToMany(mappedBy = "doctors")
     @ToString.Exclude
     private Set<Department> departments = new HashSet<>();
+
+    @OneToOne
+    @MapsId
+    private User user;
 }

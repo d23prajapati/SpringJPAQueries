@@ -74,8 +74,11 @@ public class AppointmentService {
 //        return appointmentRepository.saveAll(appointments);
 //    }
 
-    public List<AppointmentResponseDto> getAllAppointments() {
-        return appointmentRepository.findAll()
+    public List<AppointmentResponseDto> getAllAppointmentsOfDoctor(Long doctorId) {
+
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
+
+        return doctor.getAppointments()
                 .stream()
                 .map(appointment -> modelMapper.map(appointment, AppointmentResponseDto.class))
                 .collect(Collectors.toList());

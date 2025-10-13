@@ -2,6 +2,7 @@ package com.coding.JPA.hospitalManagement.controller;
 
 import com.coding.JPA.hospitalManagement.dto.LoginRequestDto;
 import com.coding.JPA.hospitalManagement.dto.LoginResponseDto;
+import com.coding.JPA.hospitalManagement.dto.SignUpRequestDto;
 import com.coding.JPA.hospitalManagement.dto.SignupResponseDto;
 import com.coding.JPA.hospitalManagement.security.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<SignupResponseDto> signup(@RequestBody LoginRequestDto signupRequestDto) {
+    public ResponseEntity<SignupResponseDto> signup(@RequestBody SignUpRequestDto signupRequestDto) {
         return ResponseEntity.ok(authService.signUp(signupRequestDto));
     }
 

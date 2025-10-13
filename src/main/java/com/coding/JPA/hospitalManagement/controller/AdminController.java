@@ -1,13 +1,13 @@
 package com.coding.JPA.hospitalManagement.controller;
 
+import com.coding.JPA.hospitalManagement.dto.DoctorResponseDto;
+import com.coding.JPA.hospitalManagement.dto.OnBoardDoctorRequestDto;
 import com.coding.JPA.hospitalManagement.dto.PatientResponseDto;
+import com.coding.JPA.hospitalManagement.services.DoctorService;
 import com.coding.JPA.hospitalManagement.services.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import java.util.List;
 public class AdminController {
 
     private final PatientService patientService;
+    private final DoctorService doctorService;
 
     @GetMapping("/patients")
     public ResponseEntity<List<PatientResponseDto>> getAllPatients(
@@ -24,5 +25,10 @@ public class AdminController {
             @RequestParam(value = "size", defaultValue = "10") Integer pageSize
     ) {
         return ResponseEntity.ok(patientService.getAllPatients(pageNumber, pageSize));
+    }
+
+    @PostMapping("/onBoardNewDoctor")
+    public ResponseEntity<DoctorResponseDto> onBoardNewDoctor(@RequestBody OnBoardDoctorRequestDto onBoardDoctorRequestDto) {
+        return ResponseEntity.ok(doctorService.onBoardNewDoctor(onBoardDoctorRequestDto));
     }
 }
